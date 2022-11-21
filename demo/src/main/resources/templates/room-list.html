@@ -1,0 +1,30 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Add room</title>
+    </head>
+    <body>
+        <h2>Your home</h2>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Room</th>
+                        <th>Area</th>
+                        <th>Doors</th>
+                        <th>Windows</th>
+                        <th>Sensors</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="room: ${rooms}">
+                        <td th:text="${room.roomName}"></td>
+                        <td th:text="${room.roomArea}"></td>
+                        <td th:text="${room.numberOfDoors}"></td>
+                        <td th:text="${room.numberOfWindows}"></td>
+                        <td th:text="${room.sensors}"></td>
+                    </tr>
+                </tbody>
+            </table>
+    </body>
+</html>
