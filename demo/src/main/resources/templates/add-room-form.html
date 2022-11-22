@@ -17,8 +17,19 @@
                 <input type="text" th:field="*{roomArea}" placeholder="Enter room area" class="form-control col-4 mb-4"/>
                 <input type="text" th:field="*{numberOfDoors}" placeholder="Enter number of doors" class="form-control col-4 mb-4"/>
                 <input type="text" th:field="*{numberOfWindows}" placeholder="Enter number of windows" class="form-control col-4 mb-4"/>
-                <input type="text" th:field="*{modules}" placeholder="Enter modules" class="form-control col-4 mb-4"/>
-                <button class="btn btn-primary" type="submit">Save</button>
+
+                <div class="input-group mb-3 shadow">
+                    <span class="input-group-text w-25">Chose the modules</span>
+                    <select th:field="*{modules}" class="form-select" multiple aria-label="multiple select example">
+                        <option th:value="Anti-fire">Anti-fire</option>
+                        <option th:value="Anti-burglary">Anti-burglary</option>
+                        <option th:value="Weather">Weather</option>
+                    </select>
+                </div>
+
+                <br>
+
+                <button class="btn btn-primary mt-4" type="submit">Save</button>
                 <input type="hidden" th:field="*{id}" />
             </form>
             <hr/>
