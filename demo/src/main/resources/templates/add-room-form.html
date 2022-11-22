@@ -9,13 +9,15 @@
               crossorigin="anonymous">
     </head>
     <body>
-        <div>
+        <div class="container">
             <h2>Add room</h2>
             <hr/>
             <form th:action="@{/saveRoom}" th:object="${room}" method="POST">
                 <input type="text" th:field="*{roomName}" placeholder="Enter room name" class="form-control col-4 mb-4"/>
                 <input type="text" th:field="*{roomArea}" placeholder="Enter room area" class="form-control col-4 mb-4"/>
                 <input type="text" th:field="*{numberOfDoors}" placeholder="Enter number of doors" class="form-control col-4 mb-4"/>
+                <input type="text" th:field="*{numberOfWindows}" placeholder="Enter number of windows" class="form-control col-4 mb-4"/>
+                <input type="text" th:field="*{modules}" placeholder="Enter modules" class="form-control col-4 mb-4"/>
                 <button class="btn btn-primary" type="submit">Save</button>
                 <input type="hidden" th:field="*{id}" />
             </form>

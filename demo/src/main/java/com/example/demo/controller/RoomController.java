@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -30,9 +32,23 @@ public class RoomController {
         mav.addObject("room", newRoom);
         return mav;
     }
-
+    @PostMapping("saveRoom")
     public String saveRoom(@ModelAttribute Room room){
         eRepo.save(room);
+        return "redirect:/list";
+    }
+
+    @GetMapping("/showUpdateForm")
+    public ModelAndView showUpdateForm(@RequestParam Long roomId){
+        ModelAndView mav = new ModelAndView("add-room-form");
+        Room room = eRepo.findById(roomId).get();
+        mav.addObject("room", room);
+        return mav;
+    }
+
+    @GetMapping("/deleteRoom")
+    public String deleteRoom(@RequestParam Long roomId){
+        eRepo.deleteById(roomId);
         return "redirect:/list";
     }
 }

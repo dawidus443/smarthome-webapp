@@ -25,6 +25,6 @@ public class Room {
 
     private Long numberOfWindows;
 
-    private String sensors;
+    private String modules;
 
 }
