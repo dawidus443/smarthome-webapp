@@ -19,12 +19,12 @@ public class RoomController {
 
     @GetMapping({"showRooms", "/", "/list"})
     public ModelAndView showRoom(){
-        long totalSurface;
+        long totalArea;
         ModelAndView mav = new ModelAndView("room-list");
         List<Room> list = eRepo.findAll();
-        totalSurface = list.stream().mapToLong(room -> (Long) room.getRoomArea()).sum();
+        totalArea = list.stream().mapToLong(room -> (Long) room.getRoomArea()).sum();
         mav.addObject("rooms", list);
-        mav.addObject("totalSurface", totalSurface);
+        mav.addObject("totalArea", totalArea);
         return mav;
     }
 
