@@ -19,9 +19,12 @@ public class RoomController {
 
     @GetMapping({"showRooms", "/", "/list"})
     public ModelAndView showRoom(){
+        long totalSurface;
         ModelAndView mav = new ModelAndView("room-list");
         List<Room> list = eRepo.findAll();
+        totalSurface = list.stream().mapToLong(room -> (Long) room.getRoomArea()).sum();
         mav.addObject("rooms", list);
+        mav.addObject("totalSurface", totalSurface);
         return mav;
     }
 
@@ -51,6 +54,4 @@ public class RoomController {
         eRepo.deleteById(roomId);
         return "redirect:/list";
     }
-
-
 }

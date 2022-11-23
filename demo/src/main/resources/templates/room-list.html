@@ -25,11 +25,11 @@
                 </thead>
                 <tbody>
                     <tr th:each="room: ${rooms}">
-                        <td th:text="${room.roomName}" class="text-center"></td>
-                        <td th:text="${room.roomArea}" class="text-center"></td>
-                        <td th:text="${room.numberOfDoors}" class="text-center"></td>
-                        <td th:text="${room.numberOfWindows}" class="text-center"></td>
-                        <td th:text="${room.modules}" class="text-center"></td>
+                        <td th:text="${room.roomName}" class="text-center align-middle"></td>
+                        <td th:text="${room.roomArea}" class="text-center align-middle"></td>
+                        <td th:text="${room.numberOfDoors}" class="text-center align-middle"></td>
+                        <td th:text="${room.numberOfWindows}" class="text-center align-middle"></td>
+                        <td th:text="${room.modules}" class="text-center align-middle"></td>
                         <td class="text-center">
                             <a th:href="@{/showUpdateForm(roomId=${room.id})}"><button type="button" class="btn btn-primary shadow">Edit</button></a>
                             <a th:href="@{/deleteRoom(roomId=${room.id})}"><button type="button" class="btn btn-danger shadow">Delete</button></a>
@@ -38,6 +38,7 @@
                 </tbody>
             </table>
             <a th:href="@{/calculateNumberOfModules}" class="btn btn-primary mb-2 shadow">Calculate</a>
+            <h3 th:text="${totalSurface}"></h3>
         </div>
     </body>
 </html>
