@@ -37,8 +37,39 @@
                     </tr>
                 </tbody>
             </table>
+
+            <table style="width:50%"  class="table">
+                <thead>
+                    <tr>
+                        <td colspan="2">Total</td>
+
+                        <td colspan="2">Modules</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Area</td>
+                        <td th:text="${totalArea}"></td>
+                        <td>Anti-fire</td>
+                        <td th:text="${antiFireModule}"></td>
+                    </tr>
+                    <tr>
+                        <td>Doors</td>
+                        <td th:text="${totalNumberOfDoors}"></td>
+                        <td>Anti-burglary</td>
+                        <td th:text="${antiBurglaryModule}"></td>
+                    </tr>
+                    <tr>
+                        <td>Windows</td>
+                        <td th:text="${totalNumberOfWindows}"></td>
+                        <td>Weather</td>
+                        <td th:text="${weatherModule}"></td>
+                    </tr>
+                </tbody>
+            </table>
+
             <a th:href="@{/calculateNumberOfModules}" class="btn btn-primary mb-2 shadow">Calculate</a>
-            <h3>Total area: </h3><h3 th:text="${totalArea}"></h3>
+
         </div>
     </body>
 </html>

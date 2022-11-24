@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 public class RoomController {
@@ -20,11 +21,50 @@ public class RoomController {
     @GetMapping({"showRooms", "/", "/list"})
     public ModelAndView showRoom(){
         long totalArea;
+        long totalNumberOfDoors;
+        long totalNumberOfWindows;
+        long antiFireModule = 0;
+        long antiBurglaryModule = 0;
+        long weatherModule = 0;
+
         ModelAndView mav = new ModelAndView("room-list");
         List<Room> list = eRepo.findAll();
         totalArea = list.stream().mapToLong(room -> (Long) room.getRoomArea()).sum();
+        totalNumberOfDoors = list.stream().mapToLong(room -> (Long) room.getNumberOfDoors()).sum();
+        totalNumberOfWindows = list.stream().mapToLong(room -> (Long) room.getNumberOfWindows()).sum();
+
+        // a = list.stream().filter(room -> room.getModules().contains("Anti-fire")).count();
+
+        // Anti-fire modules counter
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getModules().contains("Anti-fire")){
+                int roomAreaAssistant = Math.toIntExact(list.get(i).getRoomArea());
+                antiFireModule++;
+                while(roomAreaAssistant > 36){
+                    antiFireModule++;
+                    roomAreaAssistant -= 36;
+                }
+            }
+        }
+
+        // Anti-burglary modules counter
+        for (int i = 0; i < list.size(); i++) {
+            antiBurglaryModule = list.stream().mapToLong(room -> (Long) room.getNumberOfWindows()).sum() +
+                    list.stream().mapToLong(room -> (Long) room.getNumberOfWindows()).sum();
+        }
+
+        for (int i = 0; i < list.size(); i++) {
+            weatherModule = list.stream().filter(room -> room.getModules().contains("Weather")).count();
+        }
+
         mav.addObject("rooms", list);
         mav.addObject("totalArea", totalArea);
+        mav.addObject("totalNumberOfDoors", totalNumberOfDoors);
+        mav.addObject("totalNumberOfWindows", totalNumberOfWindows);
+        mav.addObject("antiFireModule", antiFireModule);
+        mav.addObject("antiBurglaryModule", antiBurglaryModule);
+        mav.addObject("weatherModule", weatherModule);
+
         return mav;
     }
 
