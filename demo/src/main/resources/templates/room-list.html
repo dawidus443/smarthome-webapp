@@ -38,32 +38,33 @@
                 </tbody>
             </table>
 
-            <table style="width:50%"  class="table">
+            <table style="width:40%"  class="table">
                 <thead>
                     <tr>
                         <td colspan="2">Total</td>
 
-                        <td colspan="2">Modules</td>
+                        <td colspan="3">Modules</td>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Area</td>
-                        <td th:text="${totalArea}"></td>
+                        <td class="text-center" th:text="${totalArea}"></td>
                         <td>Anti-fire</td>
-                        <td th:text="${antiFireModule}"></td>
+                        <td class="text-center" colspan="2" th:text="${antiFireModule}"></td>
                     </tr>
                     <tr>
                         <td>Doors</td>
-                        <td th:text="${totalNumberOfDoors}"></td>
-                        <td>Anti-burglary</td>
-                        <td th:text="${antiBurglaryModule}"></td>
+                        <td class="text-center" th:text="${totalNumberOfDoors}"></td>
+                        <td>Anti-burglary (HC PIR)</td>
+                        <td class="text-center" th:text="${antiBurglaryModuleHC}"></td>
+                        <td class="text-center" th:text="${antiBurglaryModulePIR}"></td>
                     </tr>
                     <tr>
                         <td>Windows</td>
-                        <td th:text="${totalNumberOfWindows}"></td>
+                        <td class="text-center" th:text="${totalNumberOfWindows}"></td>
                         <td>Weather</td>
-                        <td th:text="${weatherModule}"></td>
+                        <td class="text-center" colspan="2" th:text="${weatherModule}"></td>
                     </tr>
                 </tbody>
             </table>

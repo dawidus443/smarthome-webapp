@@ -24,7 +24,8 @@ public class RoomController {
         long totalNumberOfDoors;
         long totalNumberOfWindows;
         long antiFireModule = 0;
-        long antiBurglaryModule = 0;
+        long antiBurglaryModuleHC = 0;
+        long antiBurglaryModulePIR = 0;
         long weatherModule = 0;
 
         ModelAndView mav = new ModelAndView("room-list");
@@ -47,12 +48,24 @@ public class RoomController {
             }
         }
 
-        // Anti-burglary modules counter
+        // Anti-burglaryHC modules counter
         for (int i = 0; i < list.size(); i++) {
-            antiBurglaryModule = list.stream().mapToLong(room -> (Long) room.getNumberOfWindows()).sum() +
+            antiBurglaryModuleHC = list.stream().mapToLong(room -> (Long) room.getNumberOfWindows()).sum() +
                     list.stream().mapToLong(room -> (Long) room.getNumberOfWindows()).sum();
         }
+        // Anti-burglaryPIR modules counter
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).getModules().contains("Anti-burglary")){
+                int roomAreaAssistant = Math.toIntExact(list.get(i).getRoomArea());
+                antiBurglaryModulePIR++;
+                while(roomAreaAssistant > 36){
+                    antiBurglaryModulePIR++;
+                    roomAreaAssistant -= 36;
+                }
+            }
+        }
 
+        // Weather modules counter
         for (int i = 0; i < list.size(); i++) {
             weatherModule = list.stream().filter(room -> room.getModules().contains("Weather")).count();
         }
@@ -62,7 +75,8 @@ public class RoomController {
         mav.addObject("totalNumberOfDoors", totalNumberOfDoors);
         mav.addObject("totalNumberOfWindows", totalNumberOfWindows);
         mav.addObject("antiFireModule", antiFireModule);
-        mav.addObject("antiBurglaryModule", antiBurglaryModule);
+        mav.addObject("antiBurglaryModuleHC", antiBurglaryModuleHC);
+        mav.addObject("antiBurglaryModulePIR", antiBurglaryModulePIR);
         mav.addObject("weatherModule", weatherModule);
 
         return mav;
