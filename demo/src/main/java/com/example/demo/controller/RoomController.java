@@ -51,7 +51,7 @@ public class RoomController {
         // Anti-burglaryHC modules counter
         for (int i = 0; i < list.size(); i++) {
             antiBurglaryModuleHC = list.stream().mapToLong(room -> (Long) room.getNumberOfWindows()).sum() +
-                    list.stream().mapToLong(room -> (Long) room.getNumberOfWindows()).sum();
+                    list.stream().mapToLong(room -> (Long) room.getNumberOfDoors()).sum();
         }
         // Anti-burglaryPIR modules counter
         for (int i = 0; i < list.size(); i++) {
@@ -70,6 +70,7 @@ public class RoomController {
             weatherModule = list.stream().filter(room -> room.getModules().contains("Weather")).count();
         }
 
+        // Map and view
         mav.addObject("rooms", list);
         mav.addObject("totalArea", totalArea);
         mav.addObject("totalNumberOfDoors", totalNumberOfDoors);
@@ -107,5 +108,11 @@ public class RoomController {
     public String deleteRoom(@RequestParam Long roomId){
         eRepo.deleteById(roomId);
         return "redirect:/list";
+    }
+
+    @GetMapping("/info")
+    public ModelAndView addInfoForm(){
+        ModelAndView mav = new ModelAndView("info");
+        return mav;
     }
 }
