@@ -12,20 +12,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@ToString
 public class Room {
 
     @Id
-    @SequenceGenerator(
-            name = "room_sequence",
-            sequenceName = "room_sequence",
-            allocationSize = 1
-    )
     @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
+            strategy = GenerationType.IDENTITY,
             generator = "room_sequence"
     )
     @Column(
             name = "id",
+            nullable = false,
             updatable = false
     )
     private Long id;
@@ -61,5 +58,12 @@ public class Room {
             columnDefinition = "TEXT"
     )
     private String modules;
+
+    @Column(
+            name = "codes",
+            nullable = false,
+            updatable = false
+    )
+    private String roomCode;
 
 }
