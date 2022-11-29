@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Room } from './room';
 import { RoomService } from './room.service';
 
@@ -10,6 +11,7 @@ import { RoomService } from './room.service';
 })
 export class AppComponent implements OnInit{
   public rooms: Room[] = [];
+  public editRoom: Room | undefined;
 
   constructor(private roomService: RoomService) { }
 
@@ -19,13 +21,46 @@ export class AppComponent implements OnInit{
 
   public getRooms(): void{
     this.roomService.getRooms().subscribe(
-      (response: Room[]) =>{
-        this.rooms = response;
-      },
-      (error: HttpErrorResponse) => {
-        alert(error.message);
-      }
+      {  
+        next:(response: Room[]) =>{
+          this.rooms = response;
+        },
+        error:(error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      }    
     );
+  }
+
+  public onAddRoom(addForm: NgForm): void{
+    document.getElementById('add-room-form')?.click();
+    this.roomService.addRoom(addForm.value).subscribe(
+      {
+        next:(response: Room) => {
+          console.log(response);
+          this.getRooms();
+          addForm.reset();
+        },
+        error:(error: HttpErrorResponse) => {
+          alert(error.message);
+          addForm.reset();
+        }
+      }
+    )
+  }
+
+  public onUpdateRoom(room: Room): void{
+    this.roomService.updateRoom(room).subscribe(
+      {
+        next:(response: Room) => {
+          console.log(response);
+          this.getRooms();
+        },
+        error:(error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      }
+    )
   }
 
   public onOpenModal(room: Room, mode: string): void {
@@ -38,6 +73,7 @@ export class AppComponent implements OnInit{
       button.setAttribute('data-target', '#addRoomModal')
     }
     if (mode  === 'edit'){
+      this.editRoom = room;
       button.setAttribute('data-target', '#updateRoomModal')
     }
     if (mode  === 'delete'){

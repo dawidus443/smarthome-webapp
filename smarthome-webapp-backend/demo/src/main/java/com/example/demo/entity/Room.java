@@ -17,7 +17,7 @@ public class Room {
 
     @Id
     @GeneratedValue(
-            strategy = GenerationType.IDENTITY,
+            strategy = GenerationType.AUTO,
             generator = "room_sequence"
     )
     @Column(

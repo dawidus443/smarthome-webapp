@@ -3,14 +3,14 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" style="color:white;">Employee Manager</a>
+    <a class="navbar-brand" style="color:white;">Room Manager</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarColor02">
        <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-             <a class="nav-link" (click)="onOpenModal(null!,'add')">Add Employee <span class="sr-only">(current)</span></a>
+             <button (click)="onOpenModal(null!,'add')">Add Room <span class="sr-only">(current)</span></button>
           </li>
        </ul>
        <form class="form-inline my-2 my-lg-0">
@@ -54,60 +54,127 @@
       </div>
 </div>
 
-<!-- Edit Modal -->
+<!-- Add Room Modal -->
 <div class="modal fade" id="addRoomModal" tabindex="-1" role="dialog" aria-labelledby="roomAddModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
        <div class="modal-content">
           <div class="modal-header">
+            <h5 class="modal-title" id="addRoomModalLabel">Add room</h5>
              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
              <span aria-hidden="true">&times;</span>
              </button>
           </div>
           <div class="modal-body">
-             <form >
+             <form #addForm="ngForm" (ngSubmit)="onAddRoom(addForm)">
                 <div class="form-group">
-                   <label for="name">Name</label>
+                   <label for="roomName">Room name</label>
+                   <input type="text" ngModel name="roomName" class="form-control" id="roomName" placeholder="Room name" required>
                 </div>
-             </form>
-          </div>
-       </div>
-    </div>
-  </div>
+                <div class="form-group">
+                  <label for="roomArea">Room area</label>
+                  <input type="text" ngModel name="roomArea" class="form-control" id="roomArea" placeholder="Room area" required>
+               </div>
+               <div class="form-group">
+                  <label for="numberOfDoors">Number of doors</label>
+                  <input type="text" ngModel name="numberOfDoors" class="form-control" id="numberOfDoors" placeholder="Number of doors" required>
+               </div>
+               <div class="form-group">
+                  <label for="numberOfWindows">Number of windows</label>
+                  <input type="text" ngModel name="numberOfWindows" class="form-control" id="numberOfWindows" placeholder="Number of windows" required>
+               </div>
+                  <div class="input-group mb-3 shadow">
+                     <span class="input-group-text w-50">Chose the modules</span>
+                     <select ngModel name="modules" id="modules" class="form-select w-50" multiple aria-label="multiple select example">
+                         <option value="Anti-fire">Anti-fire</option>
+                         <option value="Anti-burglary">Anti-burglary</option>
+                         <option value="Weather">Weather</option>
+                         <option value="--">--</option>
+                     </select>
+                 </div>
+                 <div class="modal-footer">
+                  <button type="button" id="add-room-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
 
-<!-- Edit Modal -->
+<!-- Edit Room Modal -->
 <div class="modal fade" id="updateRoomModal" tabindex="-1" role="dialog" aria-labelledby="roomEditModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-       <div class="modal-content">
-          <div class="modal-header">
-             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-             </button>
-          </div>
-          <div class="modal-body">
-             <form >
-                <div class="form-group">
-                   <label for="name">Name</label>
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="updateRoomModalLabel">Edit room {{editRoom?.roomName}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form #editForm="ngForm">
+               <div class="form-group">
+                  <label for="roomName">Room name</label>
+                  <input type="text" ngModel="{{editRoom?.roomName}}" name="roomName" class="form-control" id="roomName" placeholder="Name" required>
+               </div>
+               <input type="hidden" ngModel="{{editRoom?.id}}" name="id" class="form-control" id="id" placeholder="">
+               <input type="hidden" ngModel="{{editRoom?.roomCode}}" name="userCode" class="form-control" id="roomCode" placeholder=""> 
+               <div class="form-group">
+                 <label for="roomArea">Room area</label>
+                 <input type="text" ngModel="{{editRoom?.roomArea}}" name="roomArea" class="form-control" id="roomArea" placeholder="Name" required>
+              </div>
+              <div class="form-group">
+                 <label for="numberOfDoors">Number of doors</label>
+                 <input type="text" ngModel="{{editRoom?.numberOfDoors}}" name="numberOfDoors" class="form-control" id="numberOfDoors" placeholder="Name" required>
+              </div>
+              <div class="form-group">
+                 <label for="numberOfWindows">Number of windows</label>
+                 <input type="text" ngModel="{{editRoom?.numberOfWindows}}" name="numberOfWindows" class="form-control" id="numberOfWindows" placeholder="Name" required>
+              </div>
+                 <div class="input-group mb-3 shadow">
+                    <span class="input-group-text w-50">Chose the modules</span>
+                    <select ngModel name="modules" id="modules" class="form-select w-50" multiple aria-label="multiple select example">
+                        <option value="Anti-fire">Anti-fire</option>
+                        <option value="Anti-burglary">Anti-burglary</option>
+                        <option value="Weather">Weather</option>
+                        <option value="--">--</option>
+                    </select>
                 </div>
-             </form>
-          </div>
-       </div>
-    </div>
-  </div>
+                <div class="modal-footer">
+                 <button type="button" id="add-room-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                 <button (click)="onUpdateRoom(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+              </div>
+            </form>
+         </div>
+      </div>
+   </div>
+ </div>
 
 <!-- Delete Modal -->
 <div class="modal fade" id="deleteRoomModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-       <div class="modal-content">
-          <div class="modal-header">
-             <h5 class="modal-title" id="deleteModelLabel">Delete Room</h5>
-             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-             <span aria-hidden="true">&times;</span>
-             </button>
-          </div>
-          <div class="modal-body">
-          </div>
-       </div>
-    </div>
+   <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Delete room</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <p>Are you sure you want to delete employee ?</p>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+               <button  class="btn btn-danger" data-dismiss="modal">Yes</button>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 
-  
+<!-- Notification for no rooms -->
+<div *ngIf="rooms?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+   <div class="alert alert-info" role="alert">
+     <h4 class="alert-heading">NO ROOMS!</h4>
+     <p>No rooms were found.</p>
+   </div>
+</div>
