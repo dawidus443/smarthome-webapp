@@ -10,6 +10,7 @@ import { RoomService } from './room.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
+  [x: string]: any;
   public rooms: Room[] = [];
   public editRoom: Room | undefined;
   public deleteRoom: Room | undefined;
@@ -91,6 +92,8 @@ export class AppComponent implements OnInit{
       this.getRooms();
     }
   }
+
+
 
   public onOpenModal(room: Room, mode: string): void {
     const container = document.getElementById('main-container');

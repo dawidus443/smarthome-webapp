@@ -53,10 +53,19 @@ public class Room {
     private Long numberOfWindows;
 
     @Column(
-            name = "modules",
-            columnDefinition = "TEXT"
+            name = "anti_fire_module"
     )
-    private String modules;
+    private boolean antiFireModule;
+
+    @Column(
+            name = "anti_burglary_module"
+    )
+    private boolean antiBurglaryModule;
+
+    @Column(
+            name = "weather_module"
+    )
+    private boolean weatherModule;
 
     @Column(
             name = "codes",

@@ -4,6 +4,10 @@ export interface Room {
     roomArea: string;
     numberOfDoors: string;
     numberOfWindows: string;
-    modules: string;
+    
+    antiFireModule: boolean;
+    antiBurglaryModule: boolean;
+    weatherModule: boolean;
+
     roomCode: string;
 }
