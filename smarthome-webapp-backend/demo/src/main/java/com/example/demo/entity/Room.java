@@ -54,7 +54,6 @@ public class Room {
 
     @Column(
             name = "modules",
-            nullable = false,
             columnDefinition = "TEXT"
     )
     private String modules;

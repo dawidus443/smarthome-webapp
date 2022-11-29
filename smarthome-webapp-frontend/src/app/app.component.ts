@@ -12,6 +12,7 @@ import { RoomService } from './room.service';
 export class AppComponent implements OnInit{
   public rooms: Room[] = [];
   public editRoom: Room | undefined;
+  public deleteRoom: Room | undefined;
 
   constructor(private roomService: RoomService) { }
 
@@ -63,6 +64,34 @@ export class AppComponent implements OnInit{
     )
   }
 
+  public onDeleteRoom(roomId: number): void{
+    this.roomService.deleteRoom(roomId).subscribe(
+      {
+        next:(response: void) => {
+          console.log(response);
+          this.getRooms();
+        },
+        error:(error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      }
+    )
+  }
+
+  public searchRooms(key: string): void{
+    console.log(key);
+    const results: Room[] = [];
+    for(const room of this.rooms){
+      if(room.roomName.toLowerCase().indexOf(key.toLowerCase())!== -1){
+        results.push(room);
+      }
+    }
+    this.rooms = results;
+    if(results.length === 0 || !key){
+      this.getRooms();
+    }
+  }
+
   public onOpenModal(room: Room, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -77,6 +106,7 @@ export class AppComponent implements OnInit{
       button.setAttribute('data-target', '#updateRoomModal')
     }
     if (mode  === 'delete'){
+      this.deleteRoom = room;
       button.setAttribute('data-target', '#deleteRoomModal')
     }
     container?.appendChild(button);

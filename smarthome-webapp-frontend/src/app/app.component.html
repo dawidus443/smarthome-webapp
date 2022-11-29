@@ -14,8 +14,7 @@
           </li>
        </ul>
        <form class="form-inline my-2 my-lg-0">
-          <input type="search" ngModel
-           name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search rooms..." required>
+          <input type="search" (ngModelChange)=" searchRooms(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search rooms..." required>
        </form>
     </div>
   </nav>
@@ -161,10 +160,10 @@
             </button>
          </div>
          <div class="modal-body">
-            <p>Are you sure you want to delete employee ?</p>
+            <p>Are you sure you want to delete {{deleteRoom?.roomName}}?</p>
             <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-               <button  class="btn btn-danger" data-dismiss="modal">Yes</button>
+               <button (click)="onDeleteRoom(deleteRoom!.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
             </div>
          </div>
       </div>
