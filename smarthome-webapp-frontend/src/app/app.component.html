@@ -27,11 +27,47 @@
 </div>
 
 <!-- Room view -->
-<div class="container " id="main-container">
-      <form class="form-inline mt-4 mb-4">
-         <input type="search" (ngModelChange)=" searchRooms(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search rooms..." required>
-         <button class="button" (click)="onOpenModal(null!,'add')">Add Room <span class="sr-only">(current)</span></button>
-      </form>
+<div class ="container">
+   <h3 class="text-center"> Design your home</h3>
+   <form class="form-inline mt-4 mb-4">
+      <input type="search" (ngModelChange)=" searchRooms(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search rooms..." required>
+      <button class="button" (click)="onOpenModal(null!,'add')">Add Room <span class="sr-only">(current)</span></button>
+   </form>
+   <div class = "card">
+       <div class = "card-body">
+           <table class="table table-striped">
+               <thead>
+                   <th class="text-center"> Room name</th>
+                   <th class="text-center"> Room area</th>
+                   <th class="text-center"> Number of windows </th>
+                   <th class="text-center"> Number of doors </th>
+                   <th class="text-center"> Modules </th>
+                   <th class="text-center"> Actions </th>
+               </thead>
+               <tbody>
+                   <tr *ngFor = "let room of rooms">
+                        <td class="text-center"> {{ room.roomName}}</td>
+                        <td class="text-center"> {{ room.roomArea}}</td>
+                        <td class="text-center"class="text-center"> {{ room.numberOfDoors}}</td>
+                        <td class="text-center"> {{ room.numberOfWindows}}</td>
+                        <td class="text-center">
+                           <p class="m-0" *ngIf="room?.antiFireModule">Anti-fire</p>
+                           <p class="m-0" *ngIf="room?.antiBurglaryModule">Anti-burglary</p>
+                           <p class="m-0" *ngIf="room?.weatherModule">Weather</p>
+                        </td>
+                        <td class="text-center">  
+                        <a (click)="onOpenModal(room, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenModal(room, 'delete')"class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                    </td>
+                   </tr>
+               </tbody>
+           </table>
+       </div>
+   </div>
+</div>
+
+<!-- Room view 2 option (cards) -->
+<!-- <div class="container " id="main-container">
       <div class="row">
         <div *ngFor="let room of rooms" class="col-md-6 col-xl-3">
             <div class="card m-b-30">
@@ -70,6 +106,28 @@
             </div>
         </div>
       </div>
+</div> -->
+
+<!-- Sensors table -->
+<div class ="container">
+   <div class = "card">
+      <div class = "card-body">
+         <table class="table table-striped">
+         <thead>
+         <tr>
+            <th scope="col">Modules</th>
+            <th scope="col">Number</th>
+         </tr>
+         </thead>
+         <tbody>
+         <tr *ngFor = "let room of rooms">
+            <td>{{room.antiBurglaryModule}}</td>
+            <td>aaa</td>
+         </tr>
+         </tbody>
+         </table>
+      </div>
+   </div>
 </div>
 
 <!-- Add Room Modal -->

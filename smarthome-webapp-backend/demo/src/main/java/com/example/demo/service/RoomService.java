@@ -39,4 +39,17 @@ public class RoomService {
     public void deleteRoom(Long id){
         roomRepository.deleteRoomById(id);
     }
+
+    public Long totalNumberOfHCSensor(){
+        Long antiBurglaryModuleHC = Long.valueOf(0);
+
+        List<Room> list = roomRepository.findAll();
+
+        for (int i = 0; i < list.size(); i++) {
+            antiBurglaryModuleHC = list.stream().mapToLong(room -> (Long) room.getNumberOfWindows()).sum() +
+                    list.stream().mapToLong(room -> (Long) room.getNumberOfDoors()).sum();
+        }
+
+        return antiBurglaryModuleHC;
+    }
 }

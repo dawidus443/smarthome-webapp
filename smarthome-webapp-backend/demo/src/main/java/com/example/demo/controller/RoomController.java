@@ -48,4 +48,10 @@ public class RoomController {
         roomService.deleteRoom(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @GetMapping("/module/anti-burglary/hc")
+    public Long getNumberOfHCSensors(){
+        Long numberOfHCSensor = roomService.totalNumberOfHCSensor();
+        return numberOfHCSensor;
+    }
 }

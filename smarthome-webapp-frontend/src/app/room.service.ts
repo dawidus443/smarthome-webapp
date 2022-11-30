@@ -27,4 +27,8 @@ export class RoomService {
   public deleteRoom(roomId: number): Observable<void>{
     return this.http.delete<void>(`${this.apiServerUrl}/room/delete/${roomId}`);
   }
+
+  // public getNumberOfHCSensors(){
+  //   return this.http.get<void>(`${this.apiServerUrl}/room/module/anti-burglary/hc`);
+  // }
 }
