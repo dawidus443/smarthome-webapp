@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Room } from './room';
 import { RoomService } from './room.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -15,11 +16,31 @@ export class AppComponent implements OnInit{
   public editRoom: Room | undefined;
   public deleteRoom: Room | undefined;
 
-  constructor(private roomService: RoomService) { }
+
+  constructor(private roomService: RoomService, private router:Router) { }
+
+  goToPage(pageName:string):void{
+    this.router.navigate([`${pageName}`]);
+  }
 
   ngOnInit() {
     this.getRooms();
+    
   }
+
+  // public getHC(): any{
+  //   this.roomService.getNumberOfPIRSensors().subscribe(
+  //     {
+  //       next:(response: number) =>{
+  //         this.name = response;
+  //         console.log(this.name);
+  //       },
+  //       error:(error: HttpErrorResponse) => {
+  //         alert(error.message);
+  //       }
+  //     }
+  //   )
+  // }
 
   public getRooms(): void{
     this.roomService.getRooms().subscribe(
@@ -94,7 +115,6 @@ export class AppComponent implements OnInit{
   }
 
 
-
   public onOpenModal(room: Room, mode: string): void {
     const container = document.getElementById('main-container');
     const button = document.createElement('button');
@@ -116,5 +136,6 @@ export class AppComponent implements OnInit{
     button.click();
   }
 
-
+  
 }
+

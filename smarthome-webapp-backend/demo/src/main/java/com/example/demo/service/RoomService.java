@@ -13,8 +13,9 @@ import java.util.UUID;
 public class RoomService {
     private final RoomRepository roomRepository;
 
+
     @Autowired
-    public RoomService( RoomRepository roomRepository){
+    public RoomService(RoomRepository roomRepository){
         this.roomRepository=roomRepository;
     }
 
@@ -40,16 +41,23 @@ public class RoomService {
         roomRepository.deleteRoomById(id);
     }
 
-    public Long totalNumberOfHCSensor(){
-        Long antiBurglaryModuleHC = Long.valueOf(0);
 
+    public Long totalNumberOfPIRSensors(){
+        Long antiBurglaryModulePIR = 0L;
         List<Room> list = roomRepository.findAll();
+    
 
         for (int i = 0; i < list.size(); i++) {
-            antiBurglaryModuleHC = list.stream().mapToLong(room -> (Long) room.getNumberOfWindows()).sum() +
-                    list.stream().mapToLong(room -> (Long) room.getNumberOfDoors()).sum();
+            if(list.get(i).isAntiBurglaryModule()){
+                int roomAreaAssistant = Math.toIntExact(list.get(i).getRoomArea());
+                antiBurglaryModulePIR++;
+                while(roomAreaAssistant > 36){
+                    antiBurglaryModulePIR++;
+                    roomAreaAssistant -= 36;
+                }
+            }
         }
 
-        return antiBurglaryModuleHC;
+        return antiBurglaryModulePIR;
     }
 }

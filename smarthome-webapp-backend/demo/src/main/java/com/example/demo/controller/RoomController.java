@@ -49,9 +49,10 @@ public class RoomController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/module/anti-burglary/hc")
-    public Long getNumberOfHCSensors(){
-        Long numberOfHCSensor = roomService.totalNumberOfHCSensor();
-        return numberOfHCSensor;
+    @GetMapping("/module/anti-burglary/PIR")
+    public Long numberOfPIRModules(){
+
+        return roomService.totalNumberOfPIRSensors();
     }
+
 }

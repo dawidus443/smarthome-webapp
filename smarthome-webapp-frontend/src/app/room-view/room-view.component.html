@@ -1,0 +1,244 @@
+<!-- Room view -->
+<div class ="container" id="main-container">
+    <h3 class="text-center"> Design your home</h3>
+    <form class="form-inline mt-4 mb-4">
+       <input type="search" (ngModelChange)=" searchRooms(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search rooms..." required>
+       <button class="button" (click)="onOpenModal(null!,'add')">Add Room <span class="sr-only">(current)</span></button>
+    </form>
+    <div class = "card">
+        <div class = "card-body">
+            <table class="table table-striped">
+                <thead>
+                    <th class="text-center"> Room name</th>
+                    <th class="text-center"> Room area</th>
+                    <th class="text-center"> Number of windows </th>
+                    <th class="text-center"> Number of doors </th>
+                    <th class="text-center"> Modules </th>
+                    <th class="text-center"> Actions </th>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let room of rooms">
+                         <td class="text-center"> {{ room.roomName}}</td>
+                         <td class="text-center"> {{ room.roomArea}}</td>
+                         <td class="text-center"class="text-center"> {{ room.numberOfDoors}}</td>
+                         <td class="text-center"> {{ room.numberOfWindows}}</td>
+                         <td class="text-center">
+                            <p class="m-0" *ngIf="room?.antiFireModule">Anti-fire</p>
+                            <p class="m-0" *ngIf="room?.antiBurglaryModule">Anti-burglary</p>
+                            <p class="m-0" *ngIf="room?.weatherModule">Weather</p>
+                         </td>
+                         <td class="text-center">  
+                         <a (click)="onOpenModal(room, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                         <a (click)="onOpenModal(room, 'delete')"class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                     </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+ </div>
+ 
+ <!-- Room view 2 option (cards) -->
+  <!-- <div class="container " id="main-container">
+       <div class="row">
+         <div *ngFor="let room of rooms" class="col-md-6 col-xl-3">
+             <div class="card m-b-30">
+                 <div class="card-body row">
+                   <div class="col-6">
+                      <a href=""><img src="https://img.freepik.com/premium-vector/bed-room-scene-icon_24877-239.jpg?w=826" alt="" class="img-fluid rounded-circle w-60"></a>
+                   </div>
+                     <div class="col-6 card-title align-self-center mb-0">
+                         <h5>{{room?.roomName}}</h5>
+                         <p class="m-0">{{room?.roomArea}} m<sup>2</sup></p>
+                     </div>
+                 </div>
+                 <ul class="list-group list-group-flush">
+                     <li class="list-group-item"><i class="fa fa-window float-right">
+                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" 
+                         class="bi bi-door-closed" viewBox="0 0 16 16">
+                             <path d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"/>
+                             <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"/>
+                         </svg></i>Doors : {{room?.numberOfDoors}}
+                      </li>
+                     <li class="list-group-item"><i class="bi bi-border-all float-right">
+                         </i>Windows : {{room?.numberOfWindows}}</li>
+                      <li class="list-group-item"><i class="bi bi-lightbulb float-right">
+                      </i>Modules : 
+                      <p class="m-0" *ngIf="room?.antiFireModule">Anti-fire</p>
+                      <p class="m-0" *ngIf="room?.antiBurglaryModule">Anti-burglary</p>
+                      <p class="m-0" *ngIf="room?.weatherModule">Weather</p>
+                   </li>
+                 </ul>
+                 <div class="card-body">
+                     <div class="float-right btn-group btn-group-sm">
+                         <a (click)="onOpenModal(room, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                         <a (click)="onOpenModal(room, 'delete')"class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" data-original-title="Delete"><i class="fa fa-times"></i></a>
+                     </div>
+                 </div>
+             </div>
+         </div>
+       </div>
+ </div>  -->
+ 
+ <!-- Sensors table -->
+ 
+ <div class ="container">
+    <div class = "card">
+       <div class = "card-body">
+          <table class="table table-striped">
+          <thead>
+          <tr>
+             <th scope="col">Modules</th>
+             <th scope="col">Number</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+             <td></td>
+             <td>aaa</td>
+          </tr>
+          </tbody>
+          </table>
+       </div>
+    </div>
+ </div>
+ 
+ <!-- Add Room Modal -->
+ <div class="modal fade" id="addRoomModal" tabindex="-1" role="dialog" aria-labelledby="roomAddModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+        <div class="modal-content">
+           <div class="modal-header">
+             <h5 class="modal-title" id="addRoomModalLabel">Add room</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+           </div>
+           <div class="modal-body">
+              <form #addForm="ngForm" (ngSubmit)="onAddRoom(addForm)">
+                 <div class="form-group">
+                    <label for="roomName">Room name</label>
+                    <input type="text" ngModel name="roomName" class="form-control" id="roomName" placeholder="Room name" required>
+                 </div>
+                 <div class="form-group">
+                   <label for="roomArea">Room area</label>
+                   <input type="text" ngModel name="roomArea" class="form-control" id="roomArea" placeholder="Room area" required>
+                </div>
+                <div class="form-group">
+                   <label for="numberOfDoors">Number of doors</label>
+                   <input type="text" ngModel name="numberOfDoors" class="form-control" id="numberOfDoors" placeholder="Number of doors" required>
+                </div>
+                <div class="form-group">
+                   <label for="numberOfWindows">Number of windows</label>
+                   <input type="text" ngModel name="numberOfWindows" class="form-control" id="numberOfWindows" placeholder="Number of windows" required>
+                </div>
+                <div class="form-group">
+                   <label>Check modules</label>
+                   <div class="form-check">
+                      <input ngModel name="antiFireModule" class="form-check-input" type="checkbox" value="" id="antiFireModule">
+                      <label class="form-check-label" for="antiFireModule">Anti-fire</label>
+                   </div>
+                   <div class="form-check">
+                      <input ngModel name="antiBurglaryModule" class="form-check-input" type="checkbox" value="" id="antiBurglaryModule">
+                      <label class="form-check-label" for="antiBurglaryModule">Anti-burglary</label>
+                   </div>
+                   <div class="form-check">
+                      <input ngModel name="weatherModule" class="form-check-input" type="checkbox" value="" id="weatherModule">
+                      <label class="form-check-label" for="weatherModule">Weather</label>
+                   </div>
+                </div>
+                  <div class="modal-footer">
+                   <button type="button" id="add-room-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                   <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+ </div>
+ 
+ <!-- Edit Room Modal -->
+ <div class="modal fade" id="updateRoomModal" tabindex="-1" role="dialog" aria-labelledby="roomEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="updateRoomModalLabel">Edit room {{editRoom?.roomName}}</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #editForm="ngForm">
+                <div class="form-group">
+                   <label for="roomName">Room name</label>
+                   <input type="text" ngModel="{{editRoom?.roomName}}" name="roomName" class="form-control" id="roomName" placeholder="Name" required>
+                </div>
+                <input type="hidden" ngModel="{{editRoom?.id}}" name="id" class="form-control" id="id" placeholder="">
+                <input type="hidden" ngModel="{{editRoom?.roomCode}}" name="userCode" class="form-control" id="roomCode" placeholder=""> 
+                <div class="form-group">
+                  <label for="roomArea">Room area</label>
+                  <input type="text" ngModel="{{editRoom?.roomArea}}" name="roomArea" class="form-control" id="roomArea" placeholder="Name" required>
+               </div>
+               <div class="form-group">
+                  <label for="numberOfDoors">Number of doors</label>
+                  <input type="text" ngModel="{{editRoom?.numberOfDoors}}" name="numberOfDoors" class="form-control" id="numberOfDoors" placeholder="Name" required>
+               </div>
+               <div class="form-group">
+                  <label for="numberOfWindows">Number of windows</label>
+                  <input type="text" ngModel="{{editRoom?.numberOfWindows}}" name="numberOfWindows" class="form-control" id="numberOfWindows" placeholder="Name" required>
+               </div>
+               
+               <div class="form-group">
+                <label>Check modules</label>
+                   <div class="form-check">
+                      <input ngModel name="antiFireModule" class="form-check-input" type="checkbox" value="" id="antiFireModule">
+                      <label class="form-check-label" for="antiFireModule">Anti-fire</label>
+                   </div>
+                   <div class="form-check">
+                      <input ngModel name="antiBurglaryModule" class="form-check-input" type="checkbox" value="" id="antiBurglaryModule">
+                      <label class="form-check-label" for="antiBurglaryModule">Anti-burglary</label>
+                   </div>
+                   <div class="form-check">
+                      <input ngModel name="weatherModule" class="form-check-input" type="checkbox" value="" id="weatherModule">
+                      <label class="form-check-label" for="weatherModule">Weather</label>
+                   </div>
+                </div>
+ 
+                 <div class="modal-footer">
+                  <button type="button" id="add-room-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button (click)="onUpdateRoom(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+               </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>
+ 
+ <!-- Delete Modal -->
+ <div class="modal fade" id="deleteRoomModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="deleteModelLabel">Delete room</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <p>Are you sure you want to delete {{deleteRoom?.roomName}}?</p>
+             <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button (click)="onDeleteRoom(deleteRoom!.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ 
+ <!-- Notification for no rooms -->
+ <div *ngIf="rooms?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO ROOMS!</h4>
+      <p>No rooms were found.</p>
+    </div>
+ </div> 
+ 
