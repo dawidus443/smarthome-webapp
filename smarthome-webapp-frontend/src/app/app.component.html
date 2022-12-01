@@ -1,22 +1,22 @@
 
 <!-- Navbar -->
 <div class="navbar navbar-expand-md navbar-dark bg-dark mb-4" role="navigation">
-   <a class="navbar-brand" href="#">Smarthome system</a>
+   <a class="navbar-brand" (click)="goToPage('home')" href="/home">Smarthome system</a>
    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
        <span class="navbar-toggler-icon"></span>
    </button>
    <div class="collapse navbar-collapse" id="navbarCollapse">
        <ul class="navbar-nav mr-auto">
            <li class="nav-item active">
-               <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+               <a (click)="goToPage('home')" class="nav-link" href="/home">Home <span class="sr-only"></span></a>
            </li>
            <li class="nav-item active">
-               <a class="nav-link" href="#">Design <span class="sr-only">(current)</span></a>
+               <a (click)="goToPage('desing-your-smarthome')" class="nav-link" href="/desing-your-smarthome">Design <span class="sr-only"></span></a>
             </li>
             <li class="nav-item active">
-               <button (click)="goToPage('Monitor')">click me</button>
+               <a (click)="goToPage('monitor')" class="nav-link" href="/monitor"  >Monitor</a>
             </li>
-           <li class="nav-item">
+           <li class="nav-item active">
             <a class="nav-link" href="https://github.com/dawidus443/smarthome-webapp" target="_blank">Github</a>
         </li>
        </ul>

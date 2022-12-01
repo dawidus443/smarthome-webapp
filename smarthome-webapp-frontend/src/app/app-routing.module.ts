@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule} from '@angular/router';
+import { HomeComponent } from './home/home.component';
 import { MonitorComponent } from './monitor/monitor.component';
-import { RoomViewComponent } from './room-view/room-view.component';
+import { RoomViewComponent } from './desing/room-view.component';
 
 
 const routes: Routes = [
-    {path:'Monitor', component: MonitorComponent},
-    {path:'roomView', component: RoomViewComponent}
+    {path:'monitor', component: MonitorComponent},
+    {path:'desing-your-smarthome', component: RoomViewComponent},
+    {path:'home', component: HomeComponent}
 ];
 
 @NgModule({

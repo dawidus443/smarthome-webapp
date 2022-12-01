@@ -45,7 +45,7 @@ public class RoomService {
     public Long totalNumberOfPIRSensors(){
         Long antiBurglaryModulePIR = 0L;
         List<Room> list = roomRepository.findAll();
-    
+
 
         for (int i = 0; i < list.size(); i++) {
             if(list.get(i).isAntiBurglaryModule()){
