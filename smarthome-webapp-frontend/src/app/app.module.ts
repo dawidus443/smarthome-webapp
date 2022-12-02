@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { RoomService } from './desing/room.service';
 import { MonitorComponent } from './monitor/monitor.component';
 import { AppRoutingModule } from './app-routing.module';
-import { RoomViewComponent } from './desing/room-view.component';
+import { RoomViewComponent } from './desing/design.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({

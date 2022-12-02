@@ -7,9 +7,9 @@ import { RoomService } from './room.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-room-view',
-  templateUrl: './room-view.component.html',
-  styleUrls: ['./room-view.component.css']
+  selector: 'app-design',
+  templateUrl: './design.component.html',
+  styleUrls: ['./design.component.css']
 })
 export class RoomViewComponent {
 
