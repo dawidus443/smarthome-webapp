@@ -5,6 +5,10 @@ import { NgForm } from '@angular/forms';
 import { Room } from './room';
 import { RoomService } from './room.service';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-design',
@@ -13,36 +17,48 @@ import { Router } from '@angular/router';
 })
 export class RoomViewComponent {
 
+    statusAntiBurglaryPIR: BehaviorSubject<string> = new BehaviorSubject('');
+    statusAntiBurglaryHC: BehaviorSubject<string> = new BehaviorSubject('');
+    statusAntiFire: BehaviorSubject<string> = new BehaviorSubject('');
+    statusWeather: BehaviorSubject<string> = new BehaviorSubject('');
+
     [x: string]: any;
     public rooms: Room[] = [];
     public editRoom: Room | undefined;
     public deleteRoom: Room | undefined;
   
   
-    constructor(private roomService: RoomService, private router:Router) { }
+    constructor(private roomService: RoomService, private router:Router, private httpClient: HttpClient) { 
+      this.httpClient.get(environment.apiBaseUrl + '/room/module/anti-burglary/PIR', {responseType: 'text'}).subscribe(statusAntiBurglaryPIR => {
+        this.statusAntiBurglaryPIR?.next(statusAntiBurglaryPIR);
+      });
+
+      this.httpClient.get(environment.apiBaseUrl + '/room/module/anti-burglary/HC', {responseType: 'text'}).subscribe(statusAntiBurglaryHC => {
+        this.statusAntiBurglaryHC?.next(statusAntiBurglaryHC);
+      });
+      this.httpClient.get(environment.apiBaseUrl + '/room/module/anti-fire', {responseType: 'text'}).subscribe(statusAntiFire => {
+        this.statusAntiFire?.next(statusAntiFire);
+      });
+      this.httpClient.get(environment.apiBaseUrl + '/room/module/weather', {responseType: 'text'}).subscribe(statusWeather => {
+        this.statusWeather?.next(statusWeather);
+      });
+      
+    }
   
+
+
     goToPage(pageName:string):void{
       this.router.navigate([`${pageName}`]);
     }
   
+    exit() {
+      window.location.reload();
+   }
+
     ngOnInit() {
       this.getRooms();
       
     }
-  
-    // public getHC(): any{
-    //   this.roomService.getNumberOfPIRSensors().subscribe(
-    //     {
-    //       next:(response: number) =>{
-    //         this.name = response;
-    //         console.log(this.name);
-    //       },
-    //       error:(error: HttpErrorResponse) => {
-    //         alert(error.message);
-    //       }
-    //     }
-    //   )
-    // }
   
     public getRooms(): void{
       this.roomService.getRooms().subscribe(

@@ -60,4 +60,51 @@ public class RoomService {
 
         return antiBurglaryModulePIR;
     }
+
+    public Long totalNumberOfHCSensors(){
+
+        Long antiBurglaryModuleHC = 0L;
+        List<Room> list = roomRepository.findAll();
+
+
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).isAntiBurglaryModule()){
+                antiBurglaryModuleHC += list.get(i).getNumberOfDoors() + list.get(i).getNumberOfWindows();
+            }
+        }
+
+        return antiBurglaryModuleHC;
+    }
+
+    public Long totalNumberOfAntiFireModules(){
+
+        Long antiFireModule = 0L;
+        List<Room> list = roomRepository.findAll();
+
+
+        for (int i = 0; i < list.size(); i++) {
+            if(list.get(i).isAntiFireModule()){
+                int roomAreaAssistant = Math.toIntExact(list.get(i).getRoomArea());
+                antiFireModule++;
+                while(roomAreaAssistant > 36){
+                    antiFireModule++;
+                    roomAreaAssistant -= 36;
+                }
+            }
+        }
+        return antiFireModule;
+    }
+
+    public Long totalNumberOfWeatherModules(){
+
+        Long weatherModule = 0L;
+        List<Room> list = roomRepository.findAll();
+
+
+        for (int i = 0; i < list.size(); i++) {
+            weatherModule = list.stream().filter(room -> room.isWeatherModule()).count();
+        }
+
+        return weatherModule;
+    }
 }

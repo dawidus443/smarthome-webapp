@@ -55,4 +55,22 @@ public class RoomController {
         return roomService.totalNumberOfPIRSensors();
     }
 
+    @GetMapping("/module/anti-burglary/HC")
+    public Long numberOfHCModules(){
+
+        return roomService.totalNumberOfHCSensors();
+    }
+    @GetMapping("/module/anti-fire")
+    public Long numberOfAntiFireModules(){
+
+        return roomService.totalNumberOfAntiFireModules();
+    }
+
+    @GetMapping("/module/weather")
+    public Long numberOfWeatherModules(){
+
+        return roomService.totalNumberOfWeatherModules();
+    }
+
+
 }

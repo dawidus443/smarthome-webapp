@@ -1,12 +1,13 @@
 <!-- Room view -->
 <div class ="container" id="main-container">
-    <h3 class="text-center"> Design your home</h3>
-    <form class="form-inline mt-4 mb-4">
-       <input type="search" (ngModelChange)=" searchRooms(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search rooms..." required>
-       <button class="button" (click)="onOpenModal(null!,'add')">Add Room <span class="sr-only">(current)</span></button>
-    </form>
+    <h2 class="text-center mb-4"> Design your home</h2>
+    
     <div class = "card">
         <div class = "card-body">
+         <form class="form-inline mb-4">
+            <input type="search" (ngModelChange)=" searchRooms(key.value)" #key="ngModel" ngModel name="key" id="searchName" class="form-control mr-sm-2" placeholder="Search rooms..." required>
+            <button class="button" (click)="onOpenModal(null!,'add')">Add Room <span class="sr-only">(current)</span></button>
+           </form>
             <table class="table table-striped">
                 <thead>
                     <th class="text-center"> Room name</th>
@@ -18,10 +19,10 @@
                 </thead>
                 <tbody>
                     <tr *ngFor = "let room of rooms">
-                         <td class="text-center"> {{ room.roomName}}</td>
-                         <td class="text-center"> {{ room.roomArea}}</td>
-                         <td class="text-center"class="text-center"> {{ room.numberOfDoors}}</td>
-                         <td class="text-center"> {{ room.numberOfWindows}}</td>
+                         <td class="text-center align-middle"> {{ room.roomName}}</td>
+                         <td class="text-center align-middle"> {{ room.roomArea}}</td>
+                         <td class="text-center align-middle"> {{ room.numberOfWindows}}</td>
+                         <td class="text-center align-middle"> {{ room.numberOfDoors}}</td>
                          <td class="text-center">
                             <p class="m-0" *ngIf="room?.antiFireModule">Anti-fire</p>
                             <p class="m-0" *ngIf="room?.antiBurglaryModule">Anti-burglary</p>
@@ -82,9 +83,12 @@
  
  <!-- Sensors table -->
  
+ 
+
  <div class ="container">
     <div class = "card">
        <div class = "card-body">
+         <button class="mb-4" (click)="exit()">Calculate</button>
           <table class="table table-striped">
           <thead>
           <tr>
@@ -94,9 +98,21 @@
           </thead>
           <tbody>
           <tr>
-             <td></td>
-             <td>aaa</td>
+             <td>Anti-burglary (PIR)</td>
+             <td>{{statusAntiBurglaryPIR.value}}</td>
           </tr>
+          <tr>
+            <td>Anti-burglary (HC)</td>
+            <td>{{statusAntiBurglaryHC.value}}</td>
+          </tr>
+          <tr>
+            <td>Anti-fire</td>
+            <td>{{statusAntiFire.value}}</td>
+         </tr>
+         <tr>
+            <td>Weather</td>
+            <td>{{statusWeather.value}}</td>
+         </tr>
           </tbody>
           </table>
        </div>
