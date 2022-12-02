@@ -7,6 +7,11 @@ export const environment = {
     apiBaseUrl: 'http://localhost:8080'
   };
   
+  export const environmentESP = {
+    production: false,
+    esp32LedServer: "http://192.168.255.30/"
+  };
+
   /*
    * For easier debugging in development mode, you can import the following file
    * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
