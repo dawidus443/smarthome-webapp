@@ -82,9 +82,6 @@
  </div>  -->
  
  <!-- Sensors table -->
- 
- 
-
  <div class ="container">
     <div class = "card">
        <div class = "card-body">
@@ -118,6 +115,7 @@
        </div>
     </div>
  </div>
+
  
  <!-- Add Room Modal -->
  <div class="modal fade" id="addRoomModal" tabindex="-1" role="dialog" aria-labelledby="roomAddModalLabel" aria-hidden="true">
@@ -140,12 +138,12 @@
                    <input type="text" ngModel name="roomArea" class="form-control" id="roomArea" placeholder="Room area" required>
                 </div>
                 <div class="form-group">
+                  <label for="numberOfWindows">Number of windows</label>
+                  <input type="text" ngModel name="numberOfWindows" class="form-control" id="numberOfWindows" placeholder="Number of windows" required>
+               </div>
+                <div class="form-group">
                    <label for="numberOfDoors">Number of doors</label>
                    <input type="text" ngModel name="numberOfDoors" class="form-control" id="numberOfDoors" placeholder="Number of doors" required>
-                </div>
-                <div class="form-group">
-                   <label for="numberOfWindows">Number of windows</label>
-                   <input type="text" ngModel name="numberOfWindows" class="form-control" id="numberOfWindows" placeholder="Number of windows" required>
                 </div>
                 <div class="form-group">
                    <label>Check modules</label>

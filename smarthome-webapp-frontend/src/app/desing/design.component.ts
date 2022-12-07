@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './design.component.html',
   styleUrls: ['./design.component.css']
 })
+
 export class RoomViewComponent {
 
     statusAntiBurglaryPIR: BehaviorSubject<string> = new BehaviorSubject('');
